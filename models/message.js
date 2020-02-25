@@ -2,6 +2,8 @@ const Sequalize = require("sequelize");
 
 const sequelize = require("../utils/database");
 
+const Conversation = require("./conversation");
+
 const Message = sequelize.define("messages", {
   id: {
     type: Sequalize.INTEGER,
@@ -9,8 +11,9 @@ const Message = sequelize.define("messages", {
     allowNull: false,
     primaryKey: true
   },
-  title: { type: Sequalize.STRING, allowNull: false },
   text: { type: Sequalize.STRING, allowNull: false }
 });
+
+Message.belongsTo(Conversation, { foreignKey: "id" });
 
 module.exports = Message;
