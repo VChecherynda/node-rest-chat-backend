@@ -1,11 +1,12 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-const port = 3000;
+const port = 8080;
 
 const sequelize = require("./utils/database");
 
 const authRoutes = require("./routes/auth");
+const conversationsRoutes = require("./routes/conversation");
 
 app.use(bodyParser.json());
 app.use(
@@ -19,6 +20,7 @@ app.get("/", (req, res, next) => {
 });
 
 app.use("/auth", authRoutes);
+app.use("/conversations", conversationsRoutes);
 
 sequelize
   .sync()
