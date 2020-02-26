@@ -3,10 +3,10 @@ const router = express.Router();
 
 const messagesController = require("../controllers/message");
 
-router.get("/create", messagesController.postCreateMessage);
+router.post("/create", messagesController.postCreateMessage);
 
-router.get("/edit", messagesController.putEditMessage);
+router.put("/edit", messagesController.putEditMessage);
 
-router.get("/delete", messagesController.deleteMessage);
+router.delete("/delete", messagesController.deleteMessage);
 
 module.exports = router;

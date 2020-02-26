@@ -6,6 +6,7 @@ const port = 8080;
 const sequelize = require("./utils/database");
 
 const authRoutes = require("./routes/auth");
+const usersRoutes = require("./routes/users");
 const conversationsRoutes = require("./routes/conversation");
 const messagesRoutes = require("./routes/message");
 
@@ -21,6 +22,7 @@ app.get("/", (req, res, next) => {
 });
 
 app.use("/auth", authRoutes);
+app.use("/users", usersRoutes);
 app.use("/conversations", conversationsRoutes);
 app.use("/message", messagesRoutes);
 

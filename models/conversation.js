@@ -11,8 +11,14 @@ const Conversation = sequelize.define("conversations", {
     allowNull: false,
     primaryKey: true
   },
-  userOneId: { type: Sequalize.STRING, allowNull: false },
-  userTwoId: { type: Sequalize.STRING, allowNull: false }
+  userOneId: {
+    type: Sequalize.INTEGER,
+    allowNull: false
+  },
+  userTwoId: {
+    type: Sequalize.INTEGER,
+    allowNull: false
+  }
 });
 
 Conversation.hasOne(User, { foreignKey: "userOneId" });
