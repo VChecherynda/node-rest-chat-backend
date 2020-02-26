@@ -11,9 +11,10 @@ const Message = sequelize.define("messages", {
     allowNull: false,
     primaryKey: true
   },
-  text: { type: Sequalize.STRING, allowNull: false }
+  text: { type: Sequalize.STRING, allowNull: false },
+  conversationId: { type: Sequalize.INTEGER, allowNull: false }
 });
 
-Message.belongsTo(Conversation, { foreignKey: "id" });
+Message.hasOne(Conversation, { foreignKey: "conversationId" });
 
 module.exports = Message;

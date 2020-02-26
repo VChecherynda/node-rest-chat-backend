@@ -5,14 +5,14 @@ exports.postCreateMessage = (req, res, next) => {
 
   if (!text) {
     res.status(403).json({
-      conversationId: "",
       message: "Message could not be empty"
     });
   }
 
-  Message.create({ text: text, foreignKey: conversationId })
+  Message.create({ text: text, conversationId: conversationId })
     .then(message => {
       res.status(201).json({
+        messageId: message.id,
         conversationId: conversationId,
         message: "Message was created"
       });
@@ -32,9 +32,9 @@ exports.putEditMessage = (req, res, next) => {
       message.text = text;
       return message.save();
     })
-    .then(result => {
+    .then(message => {
       res.status(201).json({
-        conversationId: "",
+        messageId: message.id,
         message: "Message was edited"
       });
     })
