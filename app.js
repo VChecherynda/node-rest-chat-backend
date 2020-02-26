@@ -7,6 +7,7 @@ const sequelize = require("./utils/database");
 
 const authRoutes = require("./routes/auth");
 const conversationsRoutes = require("./routes/conversation");
+const messagesRoutes = require("./routes/message");
 
 app.use(bodyParser.json());
 app.use(
@@ -21,6 +22,7 @@ app.get("/", (req, res, next) => {
 
 app.use("/auth", authRoutes);
 app.use("/conversations", conversationsRoutes);
+app.use("/message", messagesRoutes);
 
 sequelize
   .sync()
