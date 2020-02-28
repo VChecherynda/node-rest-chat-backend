@@ -2,6 +2,7 @@ const Sequalize = require("sequelize");
 
 const sequelize = require("../utils/database");
 
+const User = require("./user");
 const Conversation = require("./conversation");
 
 const Message = sequelize.define("messages", {
@@ -12,9 +13,11 @@ const Message = sequelize.define("messages", {
     primaryKey: true
   },
   text: { type: Sequalize.STRING, allowNull: false },
+  userId: { type: Sequalize.INTEGER, allowNull: false },
   conversationId: { type: Sequalize.INTEGER, allowNull: false }
 });
 
+Message.hasOne(User, { foreignKey: "userId" });
 Message.hasOne(Conversation, { foreignKey: "conversationId" });
 
 module.exports = Message;
