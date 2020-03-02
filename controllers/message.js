@@ -1,4 +1,40 @@
+const Conversation = require("../models/conversation");
 const Message = require("../models/message");
+
+exports.getMessages = (req, res, next) => {
+  const { id } = req.params;
+
+  Conversation.findByPk(id, { attributes: ["id", "userOneId", "userTwoId"] })
+    .then(conversation => {
+      if (!conversation) {
+        return res.status(404).json({ message: "Conversation not found" });
+      }
+
+      Message.findOne({
+        where: {
+          userId: conversation.userOneId,
+          conversationId: conversation.id
+        }
+      }).then(userOneMessages => {
+        Message.findOne({
+          where: {
+            userId: conversation.userTwoId,
+            conversationId: conversation.id
+          }
+        }).then(userTwoMessages => {
+          res.status(200).json({
+            userOneMessages: (userOneMessages && [userOneMessages]) || [],
+            userTwoMessages: (userTwoMessages && [userTwoMessages]) || []
+          });
+        });
+      });
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+};
 
 exports.postCreateMessage = (req, res, next) => {
   const { userId, conversationId, text } = req.body;
