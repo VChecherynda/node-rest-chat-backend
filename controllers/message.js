@@ -12,20 +12,22 @@ exports.getMessages = (req, res, next) => {
         return res.status(404).json({ message: "Conversation not found" });
       }
 
-      Message.findOne({
+      Message.findAll({
         where: {
           userId: conversation.userOneId,
           conversationId: conversation.id
         },
         raw: true
       }).then(userOneMessages => {
-        Message.findOne({
+        Message.findAll({
           where: {
             userId: conversation.userTwoId,
             conversationId: conversation.id
           },
           raw: true
         }).then(userTwoMessages => {
+          console.log(userOneMessages, userTwoMessages);
+
           const combinedMessages = [].concat(
             isNull(userOneMessages),
             isNull(userTwoMessages)
