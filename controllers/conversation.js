@@ -36,29 +36,31 @@ exports.getConversationsList = (req, res, next) => {
 };
 
 exports.getConversation = (req, res, next) => {
-  const { conversationId } = req.body;
+  const { id } = req.params;
 
-  Conversation.findByPk(conversationId)
+  Conversation.findByPk(id, { attributes: ["id", "userOneId", "userTwoId"] })
     .then(conversation => {
       if (!conversation) {
         return res.status(404).json({ message: "Conversation not found" });
       }
 
-      const userOneMessages = Message.find({
+      Message.findOne({
         where: {
-          userId: conversation.userOneId
+          userId: conversation.userOneId,
+          conversationId: conversation.id
         }
-      });
-
-      const userTwoMessages = Message.find({
-        where: {
-          userId: conversation.userTwoId
-        }
-      });
-
-      res.status(200).json({
-        userOneMessages: userOneMessages,
-        userTwoMessages: userTwoMessages
+      }).then(userOneMessages => {
+        Message.findOne({
+          where: {
+            userId: conversation.userTwoId,
+            conversationId: conversation.id
+          }
+        }).then(userTwoMessages => {
+          res.status(200).json({
+            userOneMessages: userOneMessages || {},
+            userTwoMessages: userTwoMessages || {}
+          });
+        });
       });
     })
     .catch(err => {

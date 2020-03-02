@@ -12,9 +12,9 @@ const Message = sequelize.define("messages", {
     allowNull: false,
     primaryKey: true
   },
-  text: { type: Sequalize.STRING, allowNull: false },
   userId: { type: Sequalize.INTEGER, allowNull: false },
-  conversationId: { type: Sequalize.INTEGER, allowNull: false }
+  conversationId: { type: Sequalize.INTEGER, allowNull: false },
+  text: { type: Sequalize.STRING, allowNull: false }
 });
 
 Message.hasOne(User, { foreignKey: "userId" });

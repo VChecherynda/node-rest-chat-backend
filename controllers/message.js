@@ -1,7 +1,7 @@
 const Message = require("../models/message");
 
 exports.postCreateMessage = (req, res, next) => {
-  const { text, conversationId } = req.body;
+  const { userId, conversationId, text } = req.body;
 
   if (!text) {
     res.status(403).json({
@@ -9,12 +9,12 @@ exports.postCreateMessage = (req, res, next) => {
     });
   }
 
-  Message.create({ text: text, conversationId: conversationId })
+  Message.create({ userId: userId, conversationId: conversationId, text: text })
     .then(message => {
       res.status(201).json({
-        messageId: message.id,
+        userId: userId,
         conversationId: conversationId,
-        message: "Message was created"
+        message: "Message is created"
       });
     })
     .catch(err => {
