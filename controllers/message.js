@@ -1,6 +1,8 @@
 const Conversation = require("../models/conversation");
 const Message = require("../models/message");
 
+const isNull = x => (x === null ? [] : x);
+
 exports.getMessages = (req, res, next) => {
   const { id } = req.params;
 
@@ -14,17 +16,27 @@ exports.getMessages = (req, res, next) => {
         where: {
           userId: conversation.userOneId,
           conversationId: conversation.id
-        }
+        },
+        raw: true
       }).then(userOneMessages => {
         Message.findOne({
           where: {
             userId: conversation.userTwoId,
             conversationId: conversation.id
-          }
+          },
+          raw: true
         }).then(userTwoMessages => {
+          const combinedMessages = [].concat(
+            isNull(userOneMessages),
+            isNull(userTwoMessages)
+          );
+
+          const filteredMessages = combinedMessages.sort((a, b) => {
+            return new Date(a.creaetedAt) - new Date(b.creaetedAt);
+          });
+
           res.status(200).json({
-            userOneMessages: (userOneMessages && [userOneMessages]) || [],
-            userTwoMessages: (userTwoMessages && [userTwoMessages]) || []
+            messages: filteredMessages
           });
         });
       });

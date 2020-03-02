@@ -37,7 +37,7 @@ app.use((req, res, next) => {
 app.use("/auth", authRoutes);
 app.use("/users", usersRoutes);
 app.use("/conversations", conversationsRoutes);
-app.use("/message", messagesRoutes);
+app.use("/messages", messagesRoutes);
 
 sequelize
   .sync()
