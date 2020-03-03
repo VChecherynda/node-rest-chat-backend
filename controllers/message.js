@@ -59,12 +59,18 @@ exports.postCreateMessage = (req, res, next) => {
     });
   }
 
-  Message.create({ userId: userId, conversationId: conversationId, text: text })
-    .then(message => {
+  Message.create({
+    userId: userId,
+    conversationId: conversationId,
+    text: text
+  })
+    .then(result => {
       res.status(201).json({
+        id: result.toJSON().id,
         userId: userId,
         conversationId: conversationId,
-        message: "Message is created"
+        text: result.toJSON().text,
+        createdAt: result.toJSON().createdAt
       });
     })
     .catch(err => {
@@ -80,7 +86,7 @@ exports.putEditMessage = (req, res, next) => {
   Message.findByPk(messageId)
     .then(message => {
       message.text = text;
-      return message.save();
+      message.save();
     })
     .then(message => {
       res.status(201).json({
@@ -100,11 +106,18 @@ exports.deleteMessage = (req, res, next) => {
 
   Message.findByPk(messageId)
     .then(message => {
-      return message.destroy();
+      const deletedMessage = {
+        messageId: message.id,
+        conversationId: message.conversationId
+      };
+
+      message.destroy();
+
+      return deletedMessage;
     })
-    .then(result => {
+    .then(deletedMessage => {
       res.status(200).json({
-        conversationId: "",
+        ...deletedMessage,
         message: "Message was deleted"
       });
     })
