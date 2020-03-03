@@ -4,20 +4,34 @@ const Message = require("../models/message");
 exports.postConversationsCreate = (req, res, next) => {
   const { userOneId, userTwoId } = req.body;
 
-  Conversation.create({
-    userOneId: userOneId,
-    userTwoId: userTwoId
+  Conversation.findOne({
+    where: {
+      userTwoId: Number(userTwoId)
+    },
+    attributes: ["id", "userOneId", "userTwoId"]
   })
-    .then(users => {
-      res.status(201).json({
-        conversationId: "",
-        message: "Conversation is created"
-      });
+    .then(conversation => {
+      if (conversation) {
+        return res.status(403).json({
+          message: "Conversation is exist already"
+        });
+      }
+
+      return;
     })
-    .catch(err => {
-      const error = new Error(err);
-      error.httpStatusCode = 500;
-      return next(error);
+    .then(result => {
+      Conversation.create({
+        userOneId: userOneId,
+        userTwoId: userTwoId
+      })
+        .then(conversation => {
+          res.status(201).json(conversation);
+        })
+        .catch(err => {
+          const error = new Error(err);
+          error.httpStatusCode = 500;
+          return next(error);
+        });
     });
 };
 
