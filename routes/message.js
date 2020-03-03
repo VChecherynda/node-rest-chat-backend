@@ -7,7 +7,7 @@ router.get("/list/:id", messagesController.getMessages);
 
 router.post("/create", messagesController.postCreateMessage);
 
-router.put("/edit", messagesController.putEditMessage);
+router.put("/update", messagesController.putUpdateMessage);
 
 router.delete("/delete", messagesController.deleteMessage);
 

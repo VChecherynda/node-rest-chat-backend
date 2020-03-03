@@ -80,19 +80,18 @@ exports.postCreateMessage = (req, res, next) => {
     });
 };
 
-exports.putEditMessage = (req, res, next) => {
-  const { text, messageId } = req.body;
+exports.putUpdateMessage = (req, res, next) => {
+  const { messageId, text } = req.body;
 
   Message.findByPk(messageId)
     .then(message => {
       message.text = text;
       message.save();
+
+      return message.toJSON();
     })
     .then(message => {
-      res.status(201).json({
-        messageId: message.id,
-        message: "Message was edited"
-      });
+      res.status(201).json(message);
     })
     .catch(err => {
       const error = new Error(err);
