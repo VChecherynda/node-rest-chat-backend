@@ -1,4 +1,5 @@
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const User = require("../models/user");
 
@@ -6,17 +7,34 @@ exports.postSignin = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  User.findOne({ where: { email: email } })
+  User.findOne({
+    where: { email: email },
+    attributes: ["id", "name", "email", "password"]
+  })
     .then(user => {
-      if (!user) {
-        return res.status(422).json({ message: "Invalid email or password" });
+      const savedUser = user.toJSON();
+
+      if (!savedUser) {
+        return res.status(401).json({ message: "Invalid email or password" });
       }
 
       bcrypt
-        .compare(password, user.password)
+        .compare(password, savedUser.password)
         .then(doMatch => {
           if (doMatch) {
-            return res.status(200).json({ user: user });
+            const token = jwt.sign(
+              {
+                id: savedUser.id,
+                email: savedUser.email
+              },
+              "superDuperSecretKey",
+              { expiresIn: "1h" }
+            );
+
+            return res.status(200).json({
+              id: savedUser.id,
+              token: token
+            });
           }
 
           throw err;
