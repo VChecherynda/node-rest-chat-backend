@@ -31,7 +31,7 @@ exports.postSignin = (req, res, next) => {
               { expiresIn: "1h" }
             );
 
-            return res.status(200).json({
+            return res.status(201).json({
               id: savedUser.id,
               token: token
             });
