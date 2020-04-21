@@ -6,8 +6,8 @@ export default class Base {
         return this.execute(cleanData);
       })
       .catch(err => {
-        console.log("[err]", err);
-        return this.handleError(err);
+        const error = this.validator.getErrors();
+        throw error;
       });
   }
 }

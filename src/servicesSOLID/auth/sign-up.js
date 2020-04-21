@@ -15,7 +15,6 @@ export default class SignUp extends Base {
 
     const validator = new Livr.Validator(rules);
     this.validator = validator;
-
     return validator.validate(data);
   }
 
@@ -28,11 +27,6 @@ export default class SignUp extends Base {
       password: hashedPassword
     });
 
-    return { status: 201, user };
-  }
-
-  async handleError() {
-    const error = this.validator.getErrors();
-    return { status: 403, error };
+    return { id: user.id, name: user.name, email: user.email };
   }
 }

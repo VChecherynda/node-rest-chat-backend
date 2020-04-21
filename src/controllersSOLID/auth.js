@@ -21,10 +21,10 @@ export default {
 
     promise
       .then(result => {
-        return res.status(201).json({ user: result });
+        return res.status(201).json(result);
       })
       .catch(err => {
-        return res.status(403).json({ message: "USER_EXIST" });
+        return res.status(403).json(err);
       });
   }
 };
