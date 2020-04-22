@@ -20,11 +20,11 @@ export default {
     const promise = service.run(data);
 
     promise
-      .then(result => {
-        return res.status(201).json(result);
+      .then(({ status, data }) => {
+        return res.status(status).json(data);
       })
-      .catch(err => {
-        return res.status(403).json(err);
+      .catch(({ status, data }) => {
+        return res.status(status).json(data);
       });
   }
 };

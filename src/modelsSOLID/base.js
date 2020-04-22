@@ -10,7 +10,7 @@ class Base extends Sequelize.Model {
     if (initHooks) this.initHooks();
   }
 
-  static async findAll(attributes) {
+  static async findAllEntity(attributes) {
     const query = {
       attributes
     };
@@ -34,20 +34,6 @@ class Base extends Sequelize.Model {
     const entity = await this.findOne({
       where: { email }
     });
-
-    if (!entity) throw new Error("WRONG_EMAIL");
-
-    return entity;
-  }
-
-  static async findAll(attributes) {
-    const query = {
-      attributes
-    };
-
-    const entity = await this.findAll(query);
-
-    if (!entity) throw new Error("WRONG_ATTRIBUTES");
 
     return entity;
   }

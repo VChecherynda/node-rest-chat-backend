@@ -7,7 +7,7 @@ export default class Base {
       })
       .catch(err => {
         const error = this.validator.getErrors();
-        throw error;
+        throw { status: 403, data: error };
       });
   }
 }
