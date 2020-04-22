@@ -1,19 +1,20 @@
+import Livr from "livr";
+Livr.Validator.defaultAutoTrim(true);
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+
 import User from "../../modelsSOLID/user";
 import Base from "../base";
 
 export default class SignIn extends Base {
   async validate(data) {
     const rules = {
-      data: [
-        "required",
-        {
-          name: "required",
-          email: ["required", "email"]
-        }
-      ]
+      email: "required",
+      password: ["required", { min_length: 6 }]
     };
 
     const validator = new Livr.Validator(rules);
+    this.validator = validator;
     return validator.validate(data);
   }
 
@@ -21,7 +22,7 @@ export default class SignIn extends Base {
     const savedUser = await User.findByEmail(data.email);
 
     if (!savedUser) {
-      return { status: 401, message: "Invalid email or password" };
+      return { status: 401, data: "Invalid email or password" };
     }
 
     const isMatch = await bcrypt.compare(data.password, savedUser.password);
@@ -36,8 +37,7 @@ export default class SignIn extends Base {
         { expiresIn: "1h" }
       );
 
-      const result = { id: savedUser.id, token: token };
-      return { status: 201, result };
+      return { status: 200, data: { id: savedUser.id, token: token } };
     }
   }
 }

@@ -21,9 +21,9 @@ export default class SignUp extends Base {
   async execute(data) {
     const hashedPassword = await bcrypt.hash(data.password, 12);
 
-    const userExist = await User.findByEmail(data.email);
+    const savedUser = await User.findByEmail(data.email);
 
-    if (userExist) {
+    if (savedUser) {
       return {
         status: 401,
         data: "Email is already taken"

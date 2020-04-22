@@ -1,5 +1,4 @@
-export const renderPromiseAsJson = (res, status, promise) => {
-  return promise.then(data => {
-    res.status(status).json({ data });
-  });
-};
+export const renderPromiseAsJson = (promise, res) =>
+  promise
+    .then(({ status, data }) => res.status(status).json(data))
+    .catch(({ status, data }) => res.status(status).json(data));

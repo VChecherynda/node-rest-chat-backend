@@ -6,6 +6,7 @@ export default class Base {
         return this.execute(cleanData);
       })
       .catch(err => {
+        console.log("[err]", err);
         const error = this.validator.getErrors();
         throw { status: 403, data: error };
       });
