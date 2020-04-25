@@ -1,5 +1,7 @@
 import User from "./user";
+import Conversation from "./conversation";
 
 export default {
-  user: User
+  User,
+  Conversation
 };

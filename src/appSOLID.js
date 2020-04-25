@@ -4,13 +4,12 @@ dotenv.config();
 import express from "express";
 import bodyParser from "body-parser";
 
-import User from "./modelsSOLID/user";
-
+import models from "./modelsSOLID";
 import sequelize from "./utils/database";
 
 import authRoutes from "./routesSOLID/auth";
 // import usersRoutes from "./routesSOLID/user";
-// import conversationsRoutes from "./routesSOLID/conversation";
+import conversationRoutes from "./routesSOLID/conversation";
 // import messagesRoutes from "./routesSOLID/message";
 
 const app = express();
@@ -42,10 +41,13 @@ app.use(
 
 app.use("/auth", authRoutes);
 // app.use("/users", usersRoutes);
-// app.use("/conversations", conversationsRoutes);
+app.use("/conversation", conversationRoutes);
 // app.use("/messages", messagesRoutes);
 
-User.init(sequelize);
+Object.values(models).forEach(model => {
+  model.init(sequelize);
+  model.initRelationsAndHooks();
+});
 
 sequelize
   .sync()

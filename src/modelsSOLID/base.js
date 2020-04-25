@@ -6,34 +6,26 @@ class Base extends Sequelize.Model {
   }
 
   static initRelationsAndHooks() {
-    if (initRelations) this.initRelations();
-    if (initHooks) this.initHooks();
+    if (this.initRelations) this.initRelations();
+    if (this.initHooks) this.initHooks();
   }
 
-  static async findAllEntity(attributes) {
+  static async findOneEntity(field, value) {
     const query = {
-      attributes
+      where: { [field]: value }
+    };
+
+    const entity = await this.findOne(query);
+
+    return entity;
+  }
+
+  static async findAllEntity(fields) {
+    const query = {
+      attributes: fields
     };
 
     const entity = await this.findAll(query);
-
-    if (!entity) throw new Error("WRONG_ATTRIBUTES");
-
-    return entity;
-  }
-
-  static async findById(id) {
-    const entity = await this.findOne({ where: { id } });
-
-    if (!entity) throw new Error("WRONG_ID");
-
-    return entity;
-  }
-
-  static async findByEmail(email) {
-    const entity = await this.findOne({
-      where: { email }
-    });
 
     return entity;
   }

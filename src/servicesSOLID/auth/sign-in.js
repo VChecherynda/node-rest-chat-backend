@@ -9,8 +9,10 @@ import Base from "../base";
 export default class SignIn extends Base {
   async validate(data) {
     const rules = {
-      email: "required",
-      password: ["required", { min_length: 6 }]
+      data: {
+        email: "required",
+        password: ["required", { min_length: 6 }]
+      }
     };
 
     const validator = new Livr.Validator(rules);
@@ -19,7 +21,7 @@ export default class SignIn extends Base {
   }
 
   async execute(data) {
-    const savedUser = await User.findByEmail(data.email);
+    const savedUser = await User.findOneEntity("email", data.email);
 
     if (!savedUser) {
       return { status: 401, data: "Invalid email or password" };
