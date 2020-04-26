@@ -5,7 +5,7 @@ import Base from "../base";
 import Conversation from "../../models/conversation";
 import Message from "../../models/message";
 
-import { isNull } from "helpers";
+import { isNull } from "../../utils/helper";
 
 export default class List extends Base {
   async validate(data) {
