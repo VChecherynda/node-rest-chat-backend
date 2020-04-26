@@ -1,6 +1,7 @@
 import MessageList from "../servicesSOLID/message/list";
 import MessageCreate from "../servicesSOLID/message/create";
 import MessageUpdate from "../servicesSOLID/message/update";
+import MessageDelete from "../servicesSOLID/message/delete";
 
 import { renderPromiseAsJson } from "../utils/helper";
 
@@ -25,6 +26,14 @@ export default {
     const data = req.body;
 
     const service = new MessageUpdate();
+    const promise = service.run({ data });
+
+    renderPromiseAsJson(promise, res);
+  },
+  delete: (req, res) => {
+    const data = req.body;
+
+    const service = new MessageDelete();
     const promise = service.run({ data });
 
     renderPromiseAsJson(promise, res);

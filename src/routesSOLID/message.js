@@ -7,6 +7,6 @@ import controllerMessage from "../controllersSOLID/message";
 router.get("/list/:id", isAuth, controllerMessage.list);
 router.post("/create", isAuth, controllerMessage.create);
 router.put("/update", isAuth, controllerMessage.update);
-// router.delete("/delete", isAuth, controllerMessage.delete);
+router.delete("/delete", isAuth, controllerMessage.delete);
 
 export default router;
