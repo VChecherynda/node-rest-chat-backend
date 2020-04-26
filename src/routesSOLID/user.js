@@ -1,9 +1,9 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const isAuth = require("../middleware/is-auth");
+import isAuth from "../middleware/is-auth";
 
-const controllerUser = require("../controllersSOLID/user");
+import controllerUser from "../controllersSOLID/user";
 
 router.get("/list", isAuth, controllerUser.list);
 
-module.exports = router;
+export default router;

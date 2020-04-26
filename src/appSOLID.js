@@ -8,7 +8,7 @@ import models from "./modelsSOLID";
 import sequelize from "./utils/database";
 
 import authRoutes from "./routesSOLID/auth";
-// import usersRoutes from "./routesSOLID/user";
+import userRoutes from "./routesSOLID/user";
 import conversationRoutes from "./routesSOLID/conversation";
 // import messagesRoutes from "./routesSOLID/message";
 
@@ -40,7 +40,7 @@ app.use(
 // });
 
 app.use("/auth", authRoutes);
-// app.use("/users", usersRoutes);
+app.use("/user", userRoutes);
 app.use("/conversation", conversationRoutes);
 // app.use("/messages", messagesRoutes);
 
