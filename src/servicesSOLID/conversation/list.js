@@ -20,8 +20,6 @@ export default class List extends Base {
       "userTwoId"
     ]);
 
-    console.log("[savedConversations]", savedConversations);
-
     const cleanedSavedConversations = savedConversations.map(
       ({ id, userOneId, userTwoId }) => {
         return {

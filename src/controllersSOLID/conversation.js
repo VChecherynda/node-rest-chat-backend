@@ -8,7 +8,7 @@ export default {
     const data = req.body;
 
     const service = new ConversationList();
-    const promise = service.run(data);
+    const promise = service.run({ data });
 
     renderPromiseAsJson(promise, res);
   },
@@ -16,7 +16,7 @@ export default {
     const data = req.body;
 
     const service = new ConversationCreate();
-    const promise = service.run(data);
+    const promise = service.run({ data });
 
     renderPromiseAsJson(promise, res);
   }

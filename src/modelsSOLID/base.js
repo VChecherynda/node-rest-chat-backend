@@ -10,6 +10,17 @@ class Base extends Sequelize.Model {
     if (this.initHooks) this.initHooks();
   }
 
+  static async findById(id, fields) {
+    const query = {
+      id,
+      attributes: fields
+    };
+
+    const entity = await this.findOne(query);
+
+    return entity;
+  }
+
   static async findOneEntity(field, value) {
     const query = {
       where: { [field]: value }

@@ -1,22 +1,31 @@
-import ConversationList from "../servicesSOLID/conversation/list";
-import ConversationCreate from "../servicesSOLID/conversation/create";
+import MessageList from "../servicesSOLID/message/list";
+import MessageCreate from "../servicesSOLID/message/create";
+import MessageUpdate from "../servicesSOLID/message/update";
 
 import { renderPromiseAsJson } from "../utils/helper";
 
 export default {
   list: (req, res) => {
-    const data = req.body;
+    const { id } = req.params;
 
-    const service = new ConversationList();
-    const promise = service.run(data);
+    const service = new MessageList();
+    const promise = service.run({ data: id });
 
     renderPromiseAsJson(promise, res);
   },
   create: (req, res) => {
     const data = req.body;
 
-    const service = new ConversationCreate();
-    const promise = service.run(data);
+    const service = new MessageCreate();
+    const promise = service.run({ data });
+
+    renderPromiseAsJson(promise, res);
+  },
+  update: (req, res) => {
+    const data = req.body;
+
+    const service = new MessageUpdate();
+    const promise = service.run({ data });
 
     renderPromiseAsJson(promise, res);
   }

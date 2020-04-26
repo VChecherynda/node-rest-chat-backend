@@ -10,7 +10,7 @@ import sequelize from "./utils/database";
 import authRoutes from "./routesSOLID/auth";
 import userRoutes from "./routesSOLID/user";
 import conversationRoutes from "./routesSOLID/conversation";
-// import messagesRoutes from "./routesSOLID/message";
+import messageRoutes from "./routesSOLID/message";
 
 const app = express();
 const port = 8080;
@@ -42,7 +42,7 @@ app.use(
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
 app.use("/conversation", conversationRoutes);
-// app.use("/messages", messagesRoutes);
+app.use("/message", messageRoutes);
 
 Object.values(models).forEach(model => {
   model.init(sequelize);
