@@ -1,15 +1,12 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const isAuth = require("../middleware/is-auth");
+import isAuth from "../middleware/is-auth";
 
-const messagesController = require("../controllers/message");
+import controllerMessage from "../controllers/message";
 
-router.get("/list/:id", isAuth, messagesController.getMessages);
+router.get("/list/:id", isAuth, controllerMessage.list);
+router.post("/create", isAuth, controllerMessage.create);
+router.put("/update", isAuth, controllerMessage.update);
+router.delete("/delete", isAuth, controllerMessage.delete);
 
-router.post("/create", isAuth, messagesController.postCreateMessage);
-
-router.put("/update", isAuth, messagesController.putUpdateMessage);
-
-router.delete("/delete", isAuth, messagesController.deleteMessage);
-
-module.exports = router;
+export default router;

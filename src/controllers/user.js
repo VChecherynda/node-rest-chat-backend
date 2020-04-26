@@ -1,4 +1,4 @@
-import UsersList from "../servicesSOLID/user/list";
+import UsersList from "../services/user/list";
 
 import { renderPromiseAsJson } from "../utils/helper";
 

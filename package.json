@@ -4,9 +4,9 @@
   "description": "chat for studing porpose",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon --exec 'babel-node --inspect=0.0.0.0 src/appSOLID.js'",
+    "start": "nodemon --exec 'babel-node --inspect=0.0.0.0 src/app.js'",
     "build": "rm -rf dist && babel src --out-dir dist && cp -r ./src ./dist",
-    "serve": "node dist/appSOLID.js"
+    "serve": "node dist/app.js"
   },
   "author": "Vadym Checherynda",
   "license": "ISC",

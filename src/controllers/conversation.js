@@ -1,50 +1,23 @@
-const Conversation = require("../models/conversation");
-const Message = require("../models/message");
+import ConversationList from "../services/conversation/list";
+import ConversationCreate from "../services/conversation/create";
 
-exports.postConversationsCreate = (req, res, next) => {
-  const { userOneId, userTwoId } = req.body;
+import { renderPromiseAsJson } from "../utils/helper";
 
-  Conversation.findOne({
-    where: {
-      userTwoId: Number(userTwoId)
-    },
-    attributes: ["id", "userOneId", "userTwoId"]
-  })
-    .then(conversation => {
-      if (conversation) {
-        return res.status(403).json({
-          message: "Conversation is exist already"
-        });
-      }
+export default {
+  list: (req, res) => {
+    const data = req.body;
 
-      return;
-    })
-    .then(result => {
-      Conversation.create({
-        userOneId: userOneId,
-        userTwoId: userTwoId
-      })
-        .then(conversation => {
-          res.status(201).json(conversation);
-        })
-        .catch(err => {
-          const error = new Error(err);
-          error.httpStatusCode = 500;
-          return next(error);
-        });
-    });
-};
+    const service = new ConversationList();
+    const promise = service.run({ data });
 
-exports.getConversationsList = (req, res, next) => {
-  Conversation.findAll({ attributes: ["id", "userOneId", "userTwoId"] })
-    .then(conversations => {
-      res.status(200).json({
-        conversations: conversations
-      });
-    })
-    .catch(err => {
-      const error = new Error(err);
-      error.httpStatusCode = 500;
-      return next(error);
-    });
+    renderPromiseAsJson(promise, res);
+  },
+  create: (req, res) => {
+    const data = req.body;
+
+    const service = new ConversationCreate();
+    const promise = service.run({ data });
+
+    renderPromiseAsJson(promise, res);
+  }
 };

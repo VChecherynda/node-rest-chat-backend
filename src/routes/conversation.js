@@ -1,11 +1,10 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const isAuth = require("../middleware/is-auth");
+import isAuth from "../middleware/is-auth";
 
-const conversationsController = require("../controllers/conversation");
+import controllerConversation from "../controllers/conversation";
 
-router.get("/list", isAuth, conversationsController.getConversationsList);
+router.get("/list", isAuth, controllerConversation.list);
+router.post("/create", isAuth, controllerConversation.create);
 
-router.post("/create", isAuth, conversationsController.postConversationsCreate);
-
-module.exports = router;
+export default router;

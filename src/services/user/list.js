@@ -1,7 +1,7 @@
 import Livr from "livr";
 Livr.Validator.defaultAutoTrim(true);
 
-import User from "../../modelsSOLID/user";
+import User from "../../models/user";
 import Base from "../base";
 
 export default class List extends Base {

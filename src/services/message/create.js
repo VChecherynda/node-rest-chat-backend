@@ -2,7 +2,7 @@ import Livr from "livr";
 Livr.Validator.defaultAutoTrim(true);
 
 import Base from "../base";
-import Message from "../../modelsSOLID/message";
+import Message from "../../models/message";
 
 export default class Create extends Base {
   async validate(data) {

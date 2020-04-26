@@ -2,10 +2,10 @@ import Livr from "livr";
 Livr.Validator.defaultAutoTrim(true);
 
 import Base from "../base";
-import Conversation from "../../modelsSOLID/conversation";
-import Message from "../../modelsSOLID/message";
+import Conversation from "../../models/conversation";
+import Message from "../../models/message";
 
-const isNull = x => (x === null ? [] : x);
+import { isNull } from "helpers";
 
 export default class List extends Base {
   async validate(data) {

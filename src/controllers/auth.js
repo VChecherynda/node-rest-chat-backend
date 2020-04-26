@@ -1,21 +1,21 @@
-import ConversationList from "../servicesSOLID/conversation/list";
-import ConversationCreate from "../servicesSOLID/conversation/create";
+import SignIn from "../services/auth/sign-in";
+import SignUp from "../services/auth/sign-up";
 
 import { renderPromiseAsJson } from "../utils/helper";
 
 export default {
-  list: (req, res) => {
+  signIn: (req, res) => {
     const data = req.body;
 
-    const service = new ConversationList();
+    const service = new SignIn();
     const promise = service.run({ data });
 
     renderPromiseAsJson(promise, res);
   },
-  create: (req, res) => {
+  signUp: (req, res) => {
     const data = req.body;
 
-    const service = new ConversationCreate();
+    const service = new SignUp();
     const promise = service.run({ data });
 
     renderPromiseAsJson(promise, res);

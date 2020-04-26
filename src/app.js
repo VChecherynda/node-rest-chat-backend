@@ -1,14 +1,19 @@
-const express = require("express");
-const bodyParser = require("body-parser");
+import dotenv from "dotenv";
+dotenv.config();
+
+import express from "express";
+import bodyParser from "body-parser";
+
+import models from "./models";
+import sequelize from "./utils/database";
+
+import authRoutes from "./routes/auth";
+import userRoutes from "./routes/user";
+import conversationRoutes from "./routes/conversation";
+import messageRoutes from "./routes/message";
+
 const app = express();
 const port = 8080;
-
-const sequelize = require("./utils/database");
-
-const authRoutes = require("./routes/auth");
-const usersRoutes = require("./routes/users");
-const conversationsRoutes = require("./routes/conversation");
-const messagesRoutes = require("./routes/message");
 
 app.use(bodyParser.json());
 app.use(
@@ -17,27 +22,32 @@ app.use(
   })
 );
 
-app.get("/", (req, res, next) => {
-  res.json({ info: "Node.js, Express, and Postgres API" });
-});
+// app.get("/", (req, res, next) => {
+//   res.json({ info: "Node.js, Express, and Postgres API" });
+// });
 
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "OPTIONS, GET, POST, PUT, PATCH, DELETE"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Content-Type, Authorization, autorization"
-  );
-  next();
-});
+// app.use((req, res, next) => {
+//   res.setHeader("Access-Control-Allow-Origin", "*");
+//   res.setHeader(
+//     "Access-Control-Allow-Methods",
+//     "OPTIONS, GET, POST, PUT, PATCH, DELETE"
+//   );
+//   res.setHeader(
+//     "Access-Control-Allow-Headers",
+//     "Content-Type, Authorization, autorization"
+//   );
+//   next();
+// });
 
-app.use("/", (req, res) => res.send("TEST"));
-app.use("/users", usersRoutes);
-app.use("/conversations", conversationsRoutes);
-app.use("/messages", messagesRoutes);
+app.use("/auth", authRoutes);
+app.use("/user", userRoutes);
+app.use("/conversation", conversationRoutes);
+app.use("/message", messageRoutes);
+
+Object.values(models).forEach(model => {
+  model.init(sequelize);
+  model.initRelationsAndHooks();
+});
 
 sequelize
   .sync()

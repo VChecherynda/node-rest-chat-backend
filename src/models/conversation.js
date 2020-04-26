@@ -1,27 +1,33 @@
-const Sequalize = require("sequelize");
+import { DataTypes as DT } from "sequelize";
+import UUIDV4 from "uuid/v4";
 
-const sequelize = require("../utils/database");
+import Base from "./base";
+import User from "./user";
 
-const User = require("./user");
+class Conversation extends Base {
+  static schema = {
+    id: {
+      type: DT.UUID,
+      primaryKey: true,
+      allowNull: false,
+      defaultValue: UUIDV4()
+    },
+    userOneId: {
+      type: DT.STRING,
+      allowNull: false
+    },
+    userTwoId: {
+      type: DT.STRING,
+      allowNull: false
+    }
+  };
 
-const Conversation = sequelize.define("conversations", {
-  id: {
-    type: Sequalize.INTEGER,
-    autoIncrement: true,
-    allowNull: false,
-    primaryKey: true
-  },
-  userOneId: {
-    type: Sequalize.INTEGER,
-    allowNull: false
-  },
-  userTwoId: {
-    type: Sequalize.INTEGER,
-    allowNull: false
+  static initRelations() {
+    this.associate = () => {
+      this.hasOne(User, { foreignKey: "userOneId" });
+      this.hasOne(User, { foreignKey: "userTwoId" });
+    };
   }
-});
+}
 
-Conversation.hasOne(User, { foreignKey: "userOneId" });
-Conversation.hasOne(User, { foreignKey: "userTwoId" });
-
-module.exports = Conversation;
+export default Conversation;

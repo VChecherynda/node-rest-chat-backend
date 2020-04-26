@@ -1,17 +1,20 @@
-// const Sequalize = require("sequelize");
+import { DataTypes as DT } from "sequelize";
+import UUIDV4 from "uuid/v4";
 
-// const sequelize = require("../utils/database");
+import Base from "./base";
 
-// const User = sequelize.define("users", {
-//   id: {
-//     type: Sequalize.INTEGER,
-//     autoIncrement: true,
-//     allowNull: false,
-//     primaryKey: true
-//   },
-//   name: { type: Sequalize.STRING, allowNull: false },
-//   email: { type: Sequalize.STRING, allowNull: false },
-//   password: { type: Sequalize.STRING, allowNull: false }
-// });
+class User extends Base {
+  static schema = {
+    id: {
+      type: DT.UUID,
+      primaryKey: true,
+      allowNull: false,
+      defaultValue: UUIDV4()
+    },
+    name: { type: DT.STRING, allowNull: false },
+    email: { type: DT.STRING, allowNull: false },
+    password: { type: DT.STRING, allowNull: false }
+  };
+}
 
-// module.exports = User;
+export default User;

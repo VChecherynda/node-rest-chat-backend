@@ -3,7 +3,7 @@ Livr.Validator.defaultAutoTrim(true);
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
-import User from "../../modelsSOLID/user";
+import User from "../../models/user";
 import Base from "../base";
 
 export default class SignIn extends Base {

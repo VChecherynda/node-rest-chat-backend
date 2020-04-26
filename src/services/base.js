@@ -1,7 +1,5 @@
 export default class Base {
   run(data) {
-    console.log("[data]", data);
-
     return this.validate(data)
       .then(cleanData => {
         console.log("[cleanData]", cleanData);

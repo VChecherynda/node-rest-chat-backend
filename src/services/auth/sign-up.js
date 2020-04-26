@@ -3,7 +3,7 @@ Livr.Validator.defaultAutoTrim(true);
 import bcrypt from "bcryptjs";
 
 import Base from "../base";
-import User from "../../modelsSOLID/user";
+import User from "../../models/user";
 
 export default class SignUp extends Base {
   async validate(data) {
