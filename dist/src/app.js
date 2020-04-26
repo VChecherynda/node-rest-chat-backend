@@ -34,6 +34,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use("/", (req, res) => res.send("TEST"));
 app.use("/auth", authRoutes);
 app.use("/users", usersRoutes);
 app.use("/conversations", conversationsRoutes);
