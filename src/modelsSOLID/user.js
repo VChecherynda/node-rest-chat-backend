@@ -4,10 +4,6 @@ import UUIDV4 from "uuid/v4";
 import Base from "./base";
 
 class User extends Base {
-  static options = {
-    modelName: "user"
-  };
-
   static schema = {
     id: {
       type: DT.UUID,

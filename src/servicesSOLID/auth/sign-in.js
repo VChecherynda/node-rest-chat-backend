@@ -9,10 +9,15 @@ import Base from "../base";
 export default class SignIn extends Base {
   async validate(data) {
     const rules = {
-      data: {
-        email: "required",
-        password: ["required", { min_length: 6 }]
-      }
+      data: [
+        "required",
+        {
+          nested_object: {
+            email: "required",
+            password: ["required", { min_length: 6 }]
+          }
+        }
+      ]
     };
 
     const validator = new Livr.Validator(rules);
@@ -20,7 +25,9 @@ export default class SignIn extends Base {
     return validator.validate(data);
   }
 
-  async execute(data) {
+  async execute(cleanData) {
+    const { data } = cleanData;
+
     const savedUser = await User.findOneEntity("email", data.email);
 
     if (!savedUser) {

@@ -46,6 +46,9 @@ app.use("/conversation", conversationRoutes);
 
 Object.values(models).forEach(model => {
   model.init(sequelize);
+});
+
+Object.values(models).forEach(model => {
   model.initRelationsAndHooks();
 });
 

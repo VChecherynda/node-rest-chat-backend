@@ -8,11 +8,16 @@ import User from "../../modelsSOLID/user";
 export default class SignUp extends Base {
   async validate(data) {
     const rules = {
-      data: {
-        name: "required",
-        email: ["required", "email"],
-        password: ["required", { min_length: 6 }]
-      }
+      data: [
+        "required",
+        {
+          nested_object: {
+            name: "required",
+            email: ["required", "email"],
+            password: ["required", { min_length: 6 }]
+          }
+        }
+      ]
     };
 
     const validator = new Livr.Validator(rules);

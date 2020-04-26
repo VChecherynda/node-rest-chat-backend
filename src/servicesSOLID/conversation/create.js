@@ -7,10 +7,15 @@ import Conversation from "../../modelsSOLID/conversation";
 export default class Create extends Base {
   async validate(data) {
     const rules = {
-      data: {
-        email: "required",
-        password: ["required", { min_length: 6 }]
-      }
+      data: [
+        "required",
+        {
+          nested_object: {
+            userOneId: "required",
+            userTwoId: "required"
+          }
+        }
+      ]
     };
 
     const validator = new Livr.Validator(rules);
@@ -18,7 +23,9 @@ export default class Create extends Base {
     return validator.validate(data);
   }
 
-  async execute(data) {
+  async execute(cleanData) {
+    const { data } = cleanData;
+
     const savedConversation = await Conversation.findOneEntity(
       "userTwoId",
       data.userTwoId
@@ -36,11 +43,9 @@ export default class Create extends Base {
       userTwoId: data.userTwoId
     });
 
-    console.log("[Created conversation]", conversation);
-
     return {
-      status: 201
-      // data: { id: user.id, name: user.name, email: user.email }
+      status: 201,
+      data: { id: conversation.id, message: "Conversation created" }
     };
   }
 }
