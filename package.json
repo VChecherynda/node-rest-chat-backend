@@ -4,7 +4,7 @@
   "description": "chat for studing porpose",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon --exec 'babel-node --inspect=0.0.0.0 src/app.js'",
+    "developemnt": "nodemon --exec 'babel-node --inspect=0.0.0.0 src/app.js'",
     "build": "rm -rf dist && babel src --out-dir dist && cp -r ./src ./dist",
     "start": "node dist/app.js",
     "sequelize": "sequelize $*"
