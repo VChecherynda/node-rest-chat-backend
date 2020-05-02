@@ -13,7 +13,7 @@ import conversationRoutes from "./routes/conversation";
 import messageRoutes from "./routes/message";
 
 const app = express();
-const port = 8080;
+const port = 9080;
 
 app.use(bodyParser.json());
 app.use(

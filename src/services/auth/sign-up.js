@@ -25,7 +25,9 @@ export default class SignUp extends Base {
     return validator.validate(data);
   }
 
-  async execute(data) {
+  async execute(cleanData) {
+    const { data } = cleanData;
+
     const hashedPassword = await bcrypt.hash(data.password, 12);
 
     const savedUser = await User.findOneEntity("email", data.email);
