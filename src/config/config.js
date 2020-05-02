@@ -1,29 +1,16 @@
 // compare to process.env
-console.dir(process.process.argv[4]);
+import dotenv from "dotenv";
+dotenv.config();
 
-module.exports = {
-  development: {
+const env = process.env.NODE_ENV || "development";
+
+export default {
+  [env]: {
     username: process.env.DB_USER,
     database: process.env.DB_NAME,
     password: process.env.DB_PASSWORD,
-    host: "localhost",
-    dialect: "postgres",
-    operatorsAliases: false
-  },
-  test: {
-    username: process.env.DB_USER,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-    host: "localhost",
-    dialect: "postgres",
-    operatorsAliases: false
-  },
-  production: {
-    username: process.env.DB_USER,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-    host: "localhost",
-    dialect: "postgres",
+    host: process.env.DB_HOST,
+    dialect: process.env.DB_DIALECT,
     operatorsAliases: false
   }
 };
