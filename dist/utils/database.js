@@ -1,0 +1,26 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _Sequelize = _interopRequireDefault(require("Sequelize"));
+
+var _dotenv = _interopRequireDefault(require("dotenv"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_dotenv.default.config();
+
+console.log(process.env.DB_DIALECT);
+const sequelize = new _Sequelize.default(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+  // gimme postgres, please!
+  dialect: process.env.DB_DIALECT,
+  host: process.env.DB_HOST,
+  port: 5432
+});
+var _default = sequelize;
+exports.default = _default;
+module.exports = exports.default;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy91dGlscy9kYXRhYmFzZS5qcyJdLCJuYW1lcyI6WyJkb3RlbnYiLCJjb25maWciLCJjb25zb2xlIiwibG9nIiwicHJvY2VzcyIsImVudiIsIkRCX0RJQUxFQ1QiLCJzZXF1ZWxpemUiLCJTZXF1ZWxpemUiLCJEQl9OQU1FIiwiREJfVVNFUiIsIkRCX1BBU1NXT1JEIiwiZGlhbGVjdCIsImhvc3QiLCJEQl9IT1NUIiwicG9ydCJdLCJtYXBwaW5ncyI6Ijs7Ozs7OztBQUFBOztBQUNBOzs7O0FBQ0FBLGdCQUFPQyxNQUFQOztBQUVBQyxPQUFPLENBQUNDLEdBQVIsQ0FBWUMsT0FBTyxDQUFDQyxHQUFSLENBQVlDLFVBQXhCO0FBRUEsTUFBTUMsU0FBUyxHQUFHLElBQUlDLGtCQUFKLENBQ2hCSixPQUFPLENBQUNDLEdBQVIsQ0FBWUksT0FESSxFQUVoQkwsT0FBTyxDQUFDQyxHQUFSLENBQVlLLE9BRkksRUFHaEJOLE9BQU8sQ0FBQ0MsR0FBUixDQUFZTSxXQUhJLEVBSWhCO0FBQ0U7QUFDQUMsRUFBQUEsT0FBTyxFQUFFUixPQUFPLENBQUNDLEdBQVIsQ0FBWUMsVUFGdkI7QUFHRU8sRUFBQUEsSUFBSSxFQUFFVCxPQUFPLENBQUNDLEdBQVIsQ0FBWVMsT0FIcEI7QUFJRUMsRUFBQUEsSUFBSSxFQUFFO0FBSlIsQ0FKZ0IsQ0FBbEI7ZUFZZVIsUyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBTZXF1ZWxpemUgZnJvbSBcIlNlcXVlbGl6ZVwiO1xuaW1wb3J0IGRvdGVudiBmcm9tIFwiZG90ZW52XCI7XG5kb3RlbnYuY29uZmlnKCk7XG5cbmNvbnNvbGUubG9nKHByb2Nlc3MuZW52LkRCX0RJQUxFQ1QpO1xuXG5jb25zdCBzZXF1ZWxpemUgPSBuZXcgU2VxdWVsaXplKFxuICBwcm9jZXNzLmVudi5EQl9OQU1FLFxuICBwcm9jZXNzLmVudi5EQl9VU0VSLFxuICBwcm9jZXNzLmVudi5EQl9QQVNTV09SRCxcbiAge1xuICAgIC8vIGdpbW1lIHBvc3RncmVzLCBwbGVhc2UhXG4gICAgZGlhbGVjdDogcHJvY2Vzcy5lbnYuREJfRElBTEVDVCxcbiAgICBob3N0OiBwcm9jZXNzLmVudi5EQl9IT1NULFxuICAgIHBvcnQ6IDU0MzJcbiAgfVxuKTtcblxuZXhwb3J0IGRlZmF1bHQgc2VxdWVsaXplO1xuIl19

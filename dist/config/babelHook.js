@@ -1,0 +1,6 @@
+"use strict";
+
+require("@babel/register");
+
+module.exports = require("./config");
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9jb25maWcvYmFiZWxIb29rLmpzIl0sIm5hbWVzIjpbInJlcXVpcmUiLCJtb2R1bGUiLCJleHBvcnRzIl0sIm1hcHBpbmdzIjoiOztBQUFBQSxPQUFPLENBQUMsaUJBQUQsQ0FBUDs7QUFDQUMsTUFBTSxDQUFDQyxPQUFQLEdBQWlCRixPQUFPLENBQUMsVUFBRCxDQUF4QiIsInNvdXJjZXNDb250ZW50IjpbInJlcXVpcmUoXCJAYmFiZWwvcmVnaXN0ZXJcIik7XG5tb2R1bGUuZXhwb3J0cyA9IHJlcXVpcmUoXCIuL2NvbmZpZ1wiKTtcbiJdfQ==
