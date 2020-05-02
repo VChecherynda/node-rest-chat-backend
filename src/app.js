@@ -39,6 +39,10 @@ app.use(
 //   next();
 // });
 
+app.get("/", (req, res, next) =>
+  res.json({ info: "Node.js, Express, and Postgres API" })
+);
+
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
 app.use("/conversation", conversationRoutes);
