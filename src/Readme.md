@@ -1,2 +1,11 @@
-For create migration use `sequelize-cli migration:generate --name user`
-For migration use command `npm run sequelize db:migrate`
+Mifration: 
+
+create `sequelize-cli migration:generate --name user`
+make migration `npm run sequelize db:migrate`
+undo migration `npm run sequelize db:migrate:undo`
+
+Seeding:
+
+create `sequelize-cli seed:generate --name user`
+make seeds `npm run sequelize db:seed:all`
+undo seeds `npm run sequelize db:seed:undo:all`
