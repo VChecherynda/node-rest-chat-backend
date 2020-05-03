@@ -42,15 +42,15 @@ app.get("/", (req, res, next) =>
   res.json({ info: "Node.js, Express, and Postgres API" })
 );
 
-// app.use("/auth", authRoutes);
-// app.use("/user", userRoutes);
-// app.use("/conversation", conversationRoutes);
-// app.use("/message", messageRoutes);
+app.use("/auth", authRoutes);
+app.use("/user", userRoutes);
+app.use("/conversation", conversationRoutes);
+app.use("/message", messageRoutes);
 
-// Object.values(models).forEach(model => {
-//   model.init(sequelize);
-//   model.initRelationsAndHooks();
-// });
+Object.values(models).forEach(model => {
+  model.init(sequelize);
+  model.initRelationsAndHooks();
+});
 
 sequelize
   .sync()
