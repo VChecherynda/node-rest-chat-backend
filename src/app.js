@@ -25,10 +25,6 @@ app.use(
   })
 );
 
-// app.get("/", (req, res, next) => {
-//   res.json({ info: "Node.js, Express, and Postgres API" });
-// });
-
 // app.use((req, res, next) => {
 //   res.setHeader("Access-Control-Allow-Origin", "*");
 //   res.setHeader(
@@ -56,24 +52,25 @@ app.get("/", (req, res, next) =>
 //   model.initRelationsAndHooks();
 // });
 
-// sequelize
-//   .sync()
-//   .then(result => {
-//     https
-//       .createServer(
-//         {
-//           key: fs.readFileSync("server.key"),
-//           cert: fs.readFileSync("server.cert")
-//         },
-//         app
-//       )
-//       .listen(port, function() {
-//         console.log(`App listening on port ${port}!`);
-//       });
-//   })
-//   .catch(err => {
-//     console.log(err);
-//   });
+sequelize
+  .sync()
+  .then(result => {
+    app.listen(port);
+    // https
+    //   .createServer(
+    //     {
+    //       key: fs.readFileSync("server.key"),
+    //       cert: fs.readFileSync("server.cert")
+    //     },
+    //     app
+    //   )
+    //   .listen(port, function() {
+    //     console.log(`App listening on port ${port}!`);
+    //   });
+  })
+  .catch(err => {
+    console.log(err);
+  });
 
 // https
 //   .createServer(
