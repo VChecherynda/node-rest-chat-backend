@@ -15,11 +15,6 @@ import userRoutes from "./routes/user";
 import conversationRoutes from "./routes/conversation";
 import messageRoutes from "./routes/message";
 
-// const options = {
-//   key: fs.readFileSync("key.pem"),
-//   cert: fs.readFileSync("cert.pem")
-// };
-
 const app = express();
 const port = process.env.PORT || 8000;
 
@@ -67,8 +62,8 @@ sequelize
     https
       .createServer(
         {
-          key: fs.readFileSync("key.pem"),
-          cert: fs.readFileSync("cert.pem")
+          key: fs.readFileSync("server.key"),
+          cert: fs.readFileSync("server.key")
         },
         app
       )
