@@ -15,10 +15,10 @@ import userRoutes from "./routes/user";
 import conversationRoutes from "./routes/conversation";
 import messageRoutes from "./routes/message";
 
-const options = {
-  key: fs.readFileSync("key.pem"),
-  cert: fs.readFileSync("cert.pem")
-};
+// const options = {
+//   key: fs.readFileSync("key.pem"),
+//   cert: fs.readFileSync("cert.pem")
+// };
 
 const app = express();
 const port = 9080;
@@ -61,13 +61,22 @@ Object.values(models).forEach(model => {
   model.initRelationsAndHooks();
 });
 
-const server = https.createServer(options, app);
-
 sequelize
   .sync()
   .then(result => {
-    console.log("App running");
-    server.listen(port);
+    https
+      .createServer(
+        {
+          key: fs.readFileSync("key.pem"),
+          cert: fs.readFileSync("cert.pem")
+        },
+        app
+      )
+      .listen(port, function() {
+        console.log(
+          `App listening on port ${port}! Go to https://localhost:${port}/`
+        );
+      });
   })
   .catch(err => {
     console.log(err);
