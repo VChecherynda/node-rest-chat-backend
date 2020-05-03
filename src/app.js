@@ -1,6 +1,9 @@
 import dotenv from "dotenv";
 dotenv.config();
 
+import https from "https";
+import fs from "fs";
+
 import express from "express";
 import bodyParser from "body-parser";
 
@@ -11,6 +14,11 @@ import authRoutes from "./routes/auth";
 import userRoutes from "./routes/user";
 import conversationRoutes from "./routes/conversation";
 import messageRoutes from "./routes/message";
+
+const options = {
+  key: fs.readFileSync("key.pem"),
+  cert: fs.readFileSync("cert.pem")
+};
 
 const app = express();
 const port = 9080;
@@ -53,11 +61,13 @@ Object.values(models).forEach(model => {
   model.initRelationsAndHooks();
 });
 
+const server = https.createServer(options, app);
+
 sequelize
   .sync()
   .then(result => {
-    console.log("App running on port" + " " + port);
-    app.listen(port);
+    console.log("App running");
+    server.listen(port);
   })
   .catch(err => {
     console.log(err);
