@@ -17,6 +17,7 @@ export default {
     password: process.env.DB_PASSWORD,
     host: process.env.DB_HOST,
     dialect: process.env.DB_DIALECT,
+    use_env_variable: process.env.DATABASE_URL,
     operatorsAliases: false
   }
 };

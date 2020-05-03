@@ -1,7 +1,7 @@
 Mifration: 
 
 create `sequelize-cli migration:generate --name user`
-make migration `npm run sequelize db:migrate`
+make migration `npm run sequelize db:migrate:all`
 undo migration `npm run sequelize db:migrate:undo`
 
 Seeding:
