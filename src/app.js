@@ -83,5 +83,3 @@ sequelize
 //   .listen(port, function() {
 //     console.log(`App 123 listening on port ${port}!`);
 //   });
-
-app.listen(port);
