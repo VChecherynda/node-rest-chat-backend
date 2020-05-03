@@ -9,3 +9,7 @@ Seeding:
 create `sequelize-cli seed:generate --name user`
 make seeds `npm run sequelize db:seed:all`
 undo seeds `npm run sequelize db:seed:undo:all`
+
+Heroku:
+
+connect to db `heroku pg:psql`
