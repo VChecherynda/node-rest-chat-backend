@@ -21,7 +21,6 @@ import messageRoutes from "./routes/message";
 // };
 
 const app = express();
-const port = 9080;
 
 app.use(bodyParser.json());
 app.use(
@@ -72,9 +71,9 @@ sequelize
         },
         app
       )
-      .listen(port, function() {
+      .listen(process.env.NODE_SERVER_PORT, function() {
         console.log(
-          `App listening on port ${port}! Go to https://localhost:${port}/`
+          `App listening on port ${process.env.NODE_SERVER_PORT}! Go to https://localhost:${process.env.NODE_SERVER_PORT}/`
         );
       });
   })
