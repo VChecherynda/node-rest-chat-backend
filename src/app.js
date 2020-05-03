@@ -51,26 +51,38 @@ app.get("/", (req, res, next) =>
 // app.use("/conversation", conversationRoutes);
 // app.use("/message", messageRoutes);
 
-Object.values(models).forEach(model => {
-  model.init(sequelize);
-  model.initRelationsAndHooks();
-});
+// Object.values(models).forEach(model => {
+//   model.init(sequelize);
+//   model.initRelationsAndHooks();
+// });
 
-sequelize
-  .sync()
-  .then(result => {
-    https
-      .createServer(
-        {
-          key: fs.readFileSync("server.key"),
-          cert: fs.readFileSync("server.cert")
-        },
-        app
-      )
-      .listen(port, function() {
-        console.log(`App listening on port ${port}!`);
-      });
-  })
-  .catch(err => {
-    console.log(err);
+// sequelize
+//   .sync()
+//   .then(result => {
+//     https
+//       .createServer(
+//         {
+//           key: fs.readFileSync("server.key"),
+//           cert: fs.readFileSync("server.cert")
+//         },
+//         app
+//       )
+//       .listen(port, function() {
+//         console.log(`App listening on port ${port}!`);
+//       });
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   });
+
+https
+  .createServer(
+    {
+      key: fs.readFileSync("server.key"),
+      cert: fs.readFileSync("server.cert")
+    },
+    app
+  )
+  .listen(port, function() {
+    console.log(`App listening on port ${port}!`);
   });
