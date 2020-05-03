@@ -63,7 +63,7 @@ sequelize
       .createServer(
         {
           key: fs.readFileSync("server.key"),
-          cert: fs.readFileSync("server.key")
+          cert: fs.readFileSync("server.cert")
         },
         app
       )
