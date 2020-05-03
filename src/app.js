@@ -75,14 +75,16 @@ app.get("/", (req, res, next) =>
 //     console.log(err);
 //   });
 
-https
-  .createServer(
-    {
-      key: fs.readFileSync("server.key"),
-      cert: fs.readFileSync("server.cert")
-    },
-    app
-  )
-  .listen(port, function() {
-    console.log(`App 123 listening on port ${port}!`);
-  });
+// https
+//   .createServer(
+//     {
+//       key: fs.readFileSync("server.key"),
+//       cert: fs.readFileSync("server.cert")
+//     },
+//     app
+//   )
+//   .listen(port, function() {
+//     console.log(`App 123 listening on port ${port}!`);
+//   });
+
+app.listen(port);
