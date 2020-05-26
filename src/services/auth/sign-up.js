@@ -28,6 +28,8 @@ export default class SignUp extends Base {
   async execute(cleanData) {
     const { data } = cleanData;
 
+    console.log('[data]', data);
+
     const hashedPassword = await bcrypt.hash(data.password, 12);
 
     const savedUser = await User.findOneEntity("email", data.email);

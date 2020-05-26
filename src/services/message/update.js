@@ -12,7 +12,7 @@ export default class Update extends Base {
         {
           nested_object: {
             id: "required",
-            text: "required"
+            message: "required"
           }
         }
       ]
@@ -27,7 +27,7 @@ export default class Update extends Base {
     const { data } = cleanData;
 
     const savedMessage = await Message.findById(data.id);
-    savedMessage.text = data.text;
+    savedMessage.message = data.message;
 
     const updatedMessage = await savedMessage.save();
 
@@ -35,7 +35,7 @@ export default class Update extends Base {
       status: 201,
       data: {
         id: updatedMessage.toJSON().id,
-        message: updatedMessage.toJSON().text
+        message: updatedMessage.toJSON().message
       }
     };
   }

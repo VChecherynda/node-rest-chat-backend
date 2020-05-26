@@ -13,7 +13,7 @@ export default class List extends Base {
     return validator.validate(data);
   }
 
-  async execute(cleanData) {
+  async execute() {
     const savedUsers = await User.findAllEntity(["id", "name", "email"]);
 
     if (!savedUsers) {

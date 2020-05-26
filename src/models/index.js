@@ -16,6 +16,6 @@ Message.options = {
 
 export default {
   User,
-  Conversation,
+  Room,
   Message
 };

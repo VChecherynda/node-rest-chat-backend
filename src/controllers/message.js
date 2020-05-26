@@ -7,10 +7,10 @@ import { renderPromiseAsJson } from "../utils/helper";
 
 export default {
   list: (req, res) => {
-    const { id } = req.params;
+    const { roomId } = req.params;
 
     const service = new MessageList();
-    const promise = service.run({ data: id });
+    const promise = service.run({ data: roomId });
 
     renderPromiseAsJson(promise, res);
   },

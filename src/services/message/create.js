@@ -12,8 +12,8 @@ export default class Create extends Base {
         {
           nested_object: {
             userId: "required",
-            conversationId: "required",
-            text: "required"
+            roomId: "required",
+            message: "required"
           }
         }
       ]
@@ -27,27 +27,27 @@ export default class Create extends Base {
   async execute(cleanData) {
     const { data } = cleanData;
 
-    if (!data.text) {
+    if (!data.message) {
       return {
         status: 403,
         data: { message: "Message could not be empty" }
       };
     }
 
-    const savedConversation = await Message.create({
+    const savedMessage = await Message.create({
       userId: data.userId,
-      conversationId: data.conversationId,
-      text: data.text
+      roomId: data.roomId,
+      message: data.message
     });
 
     return {
       status: 201,
       data: {
-        id: savedConversation.toJSON().id,
+        id: savedMessage.toJSON().id,
         userId: data.userId,
-        conversationId: data.conversationId,
-        text: savedConversation.toJSON().text,
-        createdAt: savedConversation.toJSON().createdAt
+        roomId: data.roomId,
+        message: savedMessage.toJSON().message,
+        createdAt: savedMessage.toJSON().createdAt
       }
     };
   }

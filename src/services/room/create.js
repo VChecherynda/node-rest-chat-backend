@@ -2,7 +2,7 @@ import Livr from "livr";
 Livr.Validator.defaultAutoTrim(true);
 
 import Base from "../base";
-import Conversation from "../../models/conversation";
+import Room from "../../models/room";
 
 export default class Create extends Base {
   async validate(data) {
@@ -11,8 +11,7 @@ export default class Create extends Base {
         "required",
         {
           nested_object: {
-            userOneId: "required",
-            userTwoId: "required"
+            name: "required",
           }
         }
       ]
@@ -26,26 +25,25 @@ export default class Create extends Base {
   async execute(cleanData) {
     const { data } = cleanData;
 
-    const savedConversation = await Conversation.findOneEntity(
-      "userTwoId",
-      data.userTwoId
+    const savedRoom = await Room.findOneEntity(
+      "name",
+      data.name
     );
 
-    if (savedConversation) {
+    if (savedRoom) {
       return {
         status: 403,
-        data: "Conversation is exists"
+        data: "Room exists"
       };
     }
 
-    const conversation = await Conversation.create({
-      userOneId: data.userOneId,
-      userTwoId: data.userTwoId
+    const conversation = await Room.create({
+      name: data.name
     });
 
     return {
       status: 201,
-      data: { id: conversation.id, message: "Conversation created" }
+      data: { id: conversation.id, message: "Room created" }
     };
   }
 }

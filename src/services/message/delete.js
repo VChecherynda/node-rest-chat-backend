@@ -29,16 +29,16 @@ export default class Delete extends Base {
 
     const deletedMessage = {
       messageId: savedMessage.id,
-      conversationId: savedMessage.conversationId
+      roomId: savedMessage.roomId
     };
 
     await savedMessage.destroy();
 
     return {
-      status: 201,
+      status: 200,
       data: {
         ...deletedMessage,
-        message: "Message was deleted"
+        message: "Message has been deleted"
       }
     };
   }
