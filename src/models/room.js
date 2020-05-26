@@ -2,9 +2,9 @@ import { DataTypes as DT } from "sequelize";
 import UUIDV4 from "uuid/v4";
 
 import Base from "./base";
-import User from "./user";
+import Message from "./message";
 
-class Conversation extends Base {
+class Room extends Base {
   static schema = {
     id: {
       type: DT.UUID,
@@ -12,22 +12,17 @@ class Conversation extends Base {
       allowNull: false,
       defaultValue: UUIDV4()
     },
-    userOneId: {
+    name: {
       type: DT.STRING,
       allowNull: false
     },
-    userTwoId: {
-      type: DT.STRING,
-      allowNull: false
-    }
   };
 
   static initRelations() {
     this.associate = () => {
-      this.hasOne(User, { foreignKey: "userOneId" });
-      this.hasOne(User, { foreignKey: "userTwoId" });
+      this.hasMany(Message, { foreignKey: "userId" });
     };
   }
 }
 
-export default Conversation;
+export default Room;

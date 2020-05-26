@@ -15,6 +15,12 @@ class User extends Base {
     email: { type: DT.STRING, allowNull: false },
     password: { type: DT.STRING, allowNull: false }
   };
+
+  static initRelations() {
+    this.associate = () => {
+      this.hasMany(Message, { foreignKey: "userId" });
+    };
+  }
 }
 
 export default User;

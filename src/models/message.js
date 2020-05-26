@@ -3,7 +3,7 @@ import UUIDV4 from "uuid/v4";
 
 import Base from "./base";
 import User from "./user";
-import Conversation from "./conversation";
+import Room from "./room";
 
 class Message extends Base {
   static schema = {
@@ -13,15 +13,15 @@ class Message extends Base {
       allowNull: false,
       defaultValue: UUIDV4()
     },
+    roomId: {
+      type: DT.STRING,
+      allowNull: false
+    },
     userId: {
       type: DT.STRING,
       allowNull: false
     },
-    conversationId: {
-      type: DT.STRING,
-      allowNull: false
-    },
-    text: {
+    message: {
       type: DT.STRING,
       allowNull: false
     }
@@ -30,7 +30,7 @@ class Message extends Base {
   static initRelations() {
     this.associate = () => {
       this.hasOne(User, { foreignKey: "userId" });
-      this.hasOne(Conversation, { foreignKey: "conversationId" });
+      this.hasOne(Room, { foreignKey: "roomId" });
     };
   }
 }

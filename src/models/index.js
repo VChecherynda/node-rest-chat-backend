@@ -1,13 +1,13 @@
 import User from "./user";
-import Conversation from "./conversation";
+import Room from "./room";
 import Message from "./message";
 
 User.options = {
   modelName: "user"
 };
 
-Conversation.options = {
-  modelName: "conversation"
+Room.options = {
+  modelName: "room"
 };
 
 Message.options = {
