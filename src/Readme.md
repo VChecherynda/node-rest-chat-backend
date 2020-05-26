@@ -1,4 +1,4 @@
-Mifration: 
+Migration: 
 
 create `sequelize-cli migration:generate --name user`
 make migration `npm run sequelize db:migrate`
@@ -12,7 +12,9 @@ undo seeds `npm run sequelize db:seed:undo:all`
 
 Heroku:
 
+connect to the heroku bash
 connect to db `heroku pg:psql`
+
 make migration `npm run sequelize db:migrate --env staging`
 undo migration `npm run sequelize db:migrate:undo --env staging`
 
